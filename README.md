@@ -6,6 +6,6 @@
 .NET FRAMEWORK 4.6.1
 외부 라이브러리: HtmlAgilityPack, Json.NET
 
-갤창랭킹.ver.2.0.7.beta
+<a href='https://github.com/hanel2527/dcinisde-crawler.ver.2/releases/download/v2.0.7-beta/gallchangranking.ver.2.0.7.beta.zip'>갤창랭킹.ver.2.0.7.beta</a>
 -GUI 적용(Windows Forms)
-https://github.com/hanel2527/dcinisde-crawler.ver.2/releases/download/v2.0.7-beta/gallchangranking.ver.2.0.7.beta.zip
+
