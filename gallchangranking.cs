@@ -286,19 +286,25 @@ gcrk.Crawler();
             }
             else { return -1; }
         }
-        public string UpdateChecker()   //구현
+        public void UpdateChecker(string currentVersion)   //구현
         {
-            string github = "https://github.com/hanel2527/dcinisde-crawler.ver.2/";
+            string github = "https://github.com/hanel2527/dcinisde-crawler.ver.2/blob/master/versions.txt";
             var client = new WebClient();
             client.Encoding = System.Text.Encoding.UTF8;
             string text = client.DownloadString(github);
             hap.HtmlDocument doc = new hap.HtmlDocument();
             doc.LoadHtml(text);
-            if(NewVersionUpdateExist != null)
+            hap.HtmlNode myVersions = doc.DocumentNode.
+                SelectSingleNode("//table[@class='highlight tab-size js-file-line-container']");
+            text = myVersions.InnerText.Trim();
+            string[] versions = text.Split(new[] { ' ', '\r', '\n', '\t' }, StringSplitOptions.RemoveEmptyEntries);
+            if (NewVersionUpdateExist != null)
             {
-                NewVersionUpdateExist(text, null);
+                if (versions[0].Equals(currentVersion))
+                    NewVersionUpdateExist("최신 버전입니다: " + versions[0], null);
+                else
+                    NewVersionUpdateExist("새로운 업데이트가 있습니다(클릭): " + versions[0], null);
             }
-            return "최신 버전입니다";
         }
         public void Crawler()
         {

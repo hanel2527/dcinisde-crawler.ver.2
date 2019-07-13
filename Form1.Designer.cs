@@ -43,6 +43,7 @@
             this.serachBtn = new System.Windows.Forms.Button();
             this.autoManagerBtn = new System.Windows.Forms.Button();
             this.gcrkCrawler = new System.Windows.Forms.TabPage();
+            this.updateShowLabel = new System.Windows.Forms.Label();
             this.updateLinkLabel = new System.Windows.Forms.LinkLabel();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
@@ -67,7 +68,6 @@
             this.isMinor = new System.Windows.Forms.CheckBox();
             this.pageProgressBar = new System.Windows.Forms.ProgressBar();
             this.tabPages = new System.Windows.Forms.TabControl();
-            this.updateShowLabel = new System.Windows.Forms.Label();
             this.dataToText.SuspendLayout();
             this.gcrkCrawler.SuspendLayout();
             this.tabPages.SuspendLayout();
@@ -245,15 +245,24 @@
             this.gcrkCrawler.Text = "갤창랭킹";
             this.gcrkCrawler.UseVisualStyleBackColor = true;
             // 
+            // updateShowLabel
+            // 
+            this.updateShowLabel.AutoSize = true;
+            this.updateShowLabel.Location = new System.Drawing.Point(10, 62);
+            this.updateShowLabel.Name = "updateShowLabel";
+            this.updateShowLabel.Size = new System.Drawing.Size(0, 15);
+            this.updateShowLabel.TabIndex = 27;
+            // 
             // updateLinkLabel
             // 
             this.updateLinkLabel.AutoSize = true;
-            this.updateLinkLabel.Location = new System.Drawing.Point(10, 35);
+            this.updateLinkLabel.Location = new System.Drawing.Point(5, 35);
             this.updateLinkLabel.Name = "updateLinkLabel";
             this.updateLinkLabel.Size = new System.Drawing.Size(77, 15);
             this.updateLinkLabel.TabIndex = 26;
             this.updateLinkLabel.TabStop = true;
             this.updateLinkLabel.Text = "현재 버전:";
+            this.updateLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.updateLinkLabel_LinkClicked);
             // 
             // linkLabel2
             // 
@@ -269,12 +278,12 @@
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(391, 3);
+            this.linkLabel1.Location = new System.Drawing.Point(384, 3);
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(392, 15);
+            this.linkLabel1.Size = new System.Drawing.Size(107, 15);
             this.linkLabel1.TabIndex = 24;
             this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "링크: https://github.com/hanel2527/dcinisde-crawler.ver.2";
+            this.linkLabel1.Text = "사용 방법 안내";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // endPageText
@@ -458,14 +467,6 @@
             this.tabPages.Size = new System.Drawing.Size(798, 506);
             this.tabPages.TabIndex = 0;
             // 
-            // updateShowLabel
-            // 
-            this.updateShowLabel.AutoSize = true;
-            this.updateShowLabel.Location = new System.Drawing.Point(10, 62);
-            this.updateShowLabel.Name = "updateShowLabel";
-            this.updateShowLabel.Size = new System.Drawing.Size(0, 15);
-            this.updateShowLabel.TabIndex = 27;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -473,7 +474,7 @@
             this.ClientSize = new System.Drawing.Size(800, 501);
             this.Controls.Add(this.tabPages);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "갤창랭킹.v2.0.8-beta";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.dataToText.ResumeLayout(false);
             this.dataToText.PerformLayout();

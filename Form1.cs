@@ -26,18 +26,20 @@ namespace DcCrawler.WF
             this.AutoSize = true;
             this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             this.updateLinkLabel.Text = "현재 버전: " + version;
+            hdc.GallchangrankingCrawler tempGcrk = new GallchangrankingCrawler();
+            tempGcrk.NewVersionUpdateExist += UpdateUpdateLinkLabel;
+            tempGcrk.UpdateChecker(this.version);
+
         }
-        private void UpdateConsole(object text, EventArgs e)
+        private void UpdateUpdateLinkLabel(object text, EventArgs e)
         {
-            textConsole.AppendText((string)text);
+            updateLinkLabel.Text = (string)text;
         }
         private void gallCheckBtn_Click(object sender, EventArgs e)
         {
             hdc.GallchangrankingCrawler tempGcrk = new hdc.GallchangrankingCrawler(1, 2, gallIdTextBox.Text, isMinor.Checked);
             tempGcrk.GallCheck(tempGcrk.gallUrl);
             textConsole.AppendText(tempGcrk.gallName);
-            tempGcrk.NewVersionUpdateExist += UpdateConsole;
-            tempGcrk.UpdateChecker();
         }
 
         private void NewPageUpdate(object sender, EventArgs e)
@@ -166,13 +168,18 @@ namespace DcCrawler.WF
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             this.linkLabel1.LinkVisited = true;
-            System.Diagnostics.Process.Start("https://github.com/hanel2527/dcinisde-crawler.ver.2");
+            System.Diagnostics.Process.Start("https://gall.dcinside.com/board/view/?id=retouching&no=7413");
         }
-
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             this.linkLabel2.LinkVisited = true;
             System.Diagnostics.Process.Start("https://gall.dcinside.com/board/lists?id=retouching");
+        }
+
+        private void updateLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.updateLinkLabel.LinkVisited = true;
+            System.Diagnostics.Process.Start("https://github.com/hanel2527/dcinisde-crawler.ver.2/releases/latest");
         }
     }
 }
