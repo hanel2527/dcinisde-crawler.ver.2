@@ -15,12 +15,7 @@ namespace DcCrawler.WF
 {
     public partial class Form1 : Form
     {
-        public static Form1 getform1;
-        public Form1 GetThisForm()
-        {
-            getform1 = this;
-            return getform1;
-        }
+        public string version = "v2.0.8-beta";
         public Form1()
         {
             InitializeComponent();
@@ -30,13 +25,19 @@ namespace DcCrawler.WF
         {
             this.AutoSize = true;
             this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            this.updateLinkLabel.Text = "현재 버전: " + version;
         }
-
+        private void UpdateConsole(object text, EventArgs e)
+        {
+            textConsole.AppendText((string)text);
+        }
         private void gallCheckBtn_Click(object sender, EventArgs e)
         {
             hdc.GallchangrankingCrawler tempGcrk = new hdc.GallchangrankingCrawler(1, 2, gallIdTextBox.Text, isMinor.Checked);
             tempGcrk.GallCheck(tempGcrk.gallUrl);
             textConsole.AppendText(tempGcrk.gallName);
+            tempGcrk.NewVersionUpdateExist += UpdateConsole;
+            tempGcrk.UpdateChecker();
         }
 
         private void NewPageUpdate(object sender, EventArgs e)
@@ -160,6 +161,18 @@ namespace DcCrawler.WF
             string filename = fileNameTextBox.Text;
             dtt.SaveToText(filename);
             programStatusLabel.Text = "저장 완료";
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.linkLabel1.LinkVisited = true;
+            System.Diagnostics.Process.Start("https://github.com/hanel2527/dcinisde-crawler.ver.2");
+        }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            this.linkLabel2.LinkVisited = true;
+            System.Diagnostics.Process.Start("https://gall.dcinside.com/board/lists?id=retouching");
         }
     }
 }

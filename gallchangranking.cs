@@ -200,28 +200,28 @@ namespace DcCrawler
     {
         static void __Main__()
         {
-            Console.Write("파일 이름: ");
-            string filename = Console.ReadLine();
-            DataToText dtt = new DataToText(filename);
-            dtt.AutoUserManager();
-            Console.Write("저장 파일 이름?: ");
-            filename = Console.ReadLine();
-            dtt.SaveToText(filename);
             /*
-            Console.Write("시작 페이지?: ");
-            int initPage = int.Parse(Console.ReadLine());
-            Console.Write("끝 페이지?: ");
-            int endPage = int.Parse(Console.ReadLine());
-            Console.Write("갤 id?: ");
-            string gallId = Console.ReadLine();
-            Console.Write("마어너 갤?(y/n): ");
-            string str = Console.ReadLine();
-            bool isMinor;
-            if (str == "y") isMinor = true;
-            else isMinor = false;
-            GallchangrankingCrawler gcrk = new GallchangrankingCrawler(initPage, endPage, gallId, isMinor);
-            gcrk.Crawler();
-            */
+Console.Write("파일 이름: ");
+string filename = Console.ReadLine();
+DataToText dtt = new DataToText(filename);
+dtt.AutoUserManager();
+Console.Write("저장 파일 이름?: ");
+filename = Console.ReadLine();
+dtt.SaveToText(filename);
+Console.Write("시작 페이지?: ");
+int initPage = int.Parse(Console.ReadLine());
+Console.Write("끝 페이지?: ");
+int endPage = int.Parse(Console.ReadLine());
+Console.Write("갤 id?: ");
+string gallId = Console.ReadLine();
+Console.Write("마어너 갤?(y/n): ");
+string str = Console.ReadLine();
+bool isMinor;
+if (str == "y") isMinor = true;
+else isMinor = false;
+GallchangrankingCrawler gcrk = new GallchangrankingCrawler(initPage, endPage, gallId, isMinor);
+gcrk.Crawler();
+*/
         }
     }
 
@@ -229,11 +229,12 @@ namespace DcCrawler
     {
         public event EventHandler newPageHappened;
         public event EventHandler CrawlingEnded;
+        public event EventHandler NewVersionUpdateExist;
 
         int initPage, endPage;
         DateTime initDate, endDate;
         bool isMinor;
-        public string gallId, gallName, gallUrl;
+        public string gallId, gallName, gallUrl, version = "v2.0.8-beta";
         List<UserRank> userList = new List<UserRank>();
         List<UserData> gallDatas = new List<UserData>();
 
@@ -256,6 +257,7 @@ namespace DcCrawler
             if (this.isMinor) { gallUrl = "https://gall.dcinside.com/mgallery/board/lists?id=" + gallId; }
             else { gallUrl = "http://gall.dcinside.com/board/lists/?id=" + gallId; }
         }
+        public GallchangrankingCrawler() { }
         public void GallCheck(string gallUrl)
         {
             var client = new WebClient();
@@ -286,10 +288,16 @@ namespace DcCrawler
         }
         public string UpdateChecker()   //구현
         {
-            string github = "https://github.com/hanel2527";
+            string github = "https://github.com/hanel2527/dcinisde-crawler.ver.2/";
             var client = new WebClient();
             client.Encoding = System.Text.Encoding.UTF8;
-            client.DownloadString(github);
+            string text = client.DownloadString(github);
+            hap.HtmlDocument doc = new hap.HtmlDocument();
+            doc.LoadHtml(text);
+            if(NewVersionUpdateExist != null)
+            {
+                NewVersionUpdateExist(text, null);
+            }
             return "최신 버전입니다";
         }
         public void Crawler()
