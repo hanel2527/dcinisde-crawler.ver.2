@@ -10,7 +10,7 @@
 외부 라이브러리: HtmlAgilityPack, Json.NET
 
 
-<a href='https://github.com/hanel2527/dcinisde-crawler.ver.2/releases/download/v2.0.8-beta/gallchangranking.ver.2.0.7.beta.zip'>갤창랭킹.ver.2.0.8.beta</a>
+<a href='https://github.com/hanel2527/dcinisde-crawler.ver.2/releases/download/v2.0.9/gallchangranking.ver.2.0.9.zip'>갤창랭킹.ver.2.0.9</a>
 
 -GUI 적용(Windows Forms)
 
@@ -19,3 +19,5 @@
 -같은 글 중복 카운팅 방지
 
 -통피 ㅇㅇ, 같은 닉 유동 및 같은 아이디 고닉 자동 합치기
+
+-표로 저장 기능 추가
