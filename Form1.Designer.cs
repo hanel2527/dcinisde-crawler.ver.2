@@ -360,7 +360,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(226, 15);
             this.label5.TabIndex = 16;
-            this.label5.Text = "갤창랭킹.2.0 made by hanel2527";
+            this.label5.Text = "갤창랭킹 2.0 made by hanel2527";
             // 
             // endDate
             // 
@@ -474,7 +474,7 @@
             this.ClientSize = new System.Drawing.Size(800, 501);
             this.Controls.Add(this.tabPages);
             this.Name = "Form1";
-            this.Text = "갤창랭킹.v2.0.8-beta";
+            this.Text = "갤창랭킹.v2.0.9-beta";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.dataToText.ResumeLayout(false);
             this.dataToText.PerformLayout();

@@ -416,9 +416,11 @@ gcrk.Crawler();
                 }
                 else
                 {
+                    System.Collections.ArrayList arr = new System.Collections.ArrayList();
                     string str = currentPage.ToString() + " 페이지, 날짜: " + currentDate.ToString();
+                    arr.Add(str); arr.Add(currentDate); arr.Add(currentPage - initPage);
                     if (newPageHappened != null)
-                        newPageHappened(str, null);
+                        newPageHappened(arr, null);
                     currentPage++;
                 }
             }
@@ -579,6 +581,7 @@ gcrk.Crawler();
                 }
                 sw.WriteLine("총 글수: " + totalCount.ToString());
                 sw.WriteLine("갤창랭킹 2.0 made by hanel2527, 마이 리틀 포니 갤러리");
+                sw.WriteLine("랭킹\t닉\t글 수\t갤 지분");
                 int index = 0;
                 int rank = 0;
                 double gallShare;
