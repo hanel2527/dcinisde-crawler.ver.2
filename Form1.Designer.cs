@@ -29,9 +29,6 @@
         private void InitializeComponent()
         {
             this.dataToText = new System.Windows.Forms.TabPage();
-            this.programStatusLabel = new System.Windows.Forms.Label();
-            this.fileNameTextBox = new System.Windows.Forms.TextBox();
-            this.saveToFileBtn = new System.Windows.Forms.Button();
             this.cancelAllCheck = new System.Windows.Forms.Button();
             this.userListView = new System.Windows.Forms.ListView();
             this.index = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -68,6 +65,7 @@
             this.isMinor = new System.Windows.Forms.CheckBox();
             this.pageProgressBar = new System.Windows.Forms.ProgressBar();
             this.tabPages = new System.Windows.Forms.TabControl();
+            this.SaveButton = new System.Windows.Forms.Button();
             this.dataToText.SuspendLayout();
             this.gcrkCrawler.SuspendLayout();
             this.tabPages.SuspendLayout();
@@ -75,9 +73,7 @@
             // 
             // dataToText
             // 
-            this.dataToText.Controls.Add(this.programStatusLabel);
-            this.dataToText.Controls.Add(this.fileNameTextBox);
-            this.dataToText.Controls.Add(this.saveToFileBtn);
+            this.dataToText.Controls.Add(this.SaveButton);
             this.dataToText.Controls.Add(this.cancelAllCheck);
             this.dataToText.Controls.Add(this.userListView);
             this.dataToText.Controls.Add(this.searchTextBox);
@@ -92,34 +88,6 @@
             this.dataToText.TabIndex = 1;
             this.dataToText.Text = "동일닉 처리 및 텍스트 파일로 저장";
             this.dataToText.UseVisualStyleBackColor = true;
-            // 
-            // programStatusLabel
-            // 
-            this.programStatusLabel.AutoSize = true;
-            this.programStatusLabel.Location = new System.Drawing.Point(660, 361);
-            this.programStatusLabel.Name = "programStatusLabel";
-            this.programStatusLabel.Size = new System.Drawing.Size(87, 15);
-            this.programStatusLabel.TabIndex = 12;
-            this.programStatusLabel.Text = "저장 파일명";
-            // 
-            // fileNameTextBox
-            // 
-            this.fileNameTextBox.Location = new System.Drawing.Point(664, 379);
-            this.fileNameTextBox.Multiline = true;
-            this.fileNameTextBox.Name = "fileNameTextBox";
-            this.fileNameTextBox.Size = new System.Drawing.Size(119, 53);
-            this.fileNameTextBox.TabIndex = 11;
-            this.fileNameTextBox.Text = "result.txt";
-            // 
-            // saveToFileBtn
-            // 
-            this.saveToFileBtn.Location = new System.Drawing.Point(672, 438);
-            this.saveToFileBtn.Name = "saveToFileBtn";
-            this.saveToFileBtn.Size = new System.Drawing.Size(111, 33);
-            this.saveToFileBtn.TabIndex = 10;
-            this.saveToFileBtn.Text = "파일로 저장";
-            this.saveToFileBtn.UseVisualStyleBackColor = true;
-            this.saveToFileBtn.Click += new System.EventHandler(this.button1_Click);
             // 
             // cancelAllCheck
             // 
@@ -467,6 +435,16 @@
             this.tabPages.Size = new System.Drawing.Size(798, 506);
             this.tabPages.TabIndex = 0;
             // 
+            // SaveButton
+            // 
+            this.SaveButton.Location = new System.Drawing.Point(676, 405);
+            this.SaveButton.Name = "SaveButton";
+            this.SaveButton.Size = new System.Drawing.Size(107, 52);
+            this.SaveButton.TabIndex = 13;
+            this.SaveButton.Text = "파일 저장";
+            this.SaveButton.UseVisualStyleBackColor = true;
+            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -474,7 +452,7 @@
             this.ClientSize = new System.Drawing.Size(800, 501);
             this.Controls.Add(this.tabPages);
             this.Name = "Form1";
-            this.Text = "갤창랭킹.v2.0.9-beta";
+            this.Text = "갤창랭킹.v2.0.9";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.dataToText.ResumeLayout(false);
             this.dataToText.PerformLayout();
@@ -488,9 +466,6 @@
         #endregion
 
         private System.Windows.Forms.TabPage dataToText;
-        private System.Windows.Forms.Label programStatusLabel;
-        private System.Windows.Forms.TextBox fileNameTextBox;
-        private System.Windows.Forms.Button saveToFileBtn;
         private System.Windows.Forms.Button cancelAllCheck;
         private System.Windows.Forms.ListView userListView;
         private System.Windows.Forms.ColumnHeader index;
@@ -527,6 +502,7 @@
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.LinkLabel updateLinkLabel;
         private System.Windows.Forms.Label updateShowLabel;
+        private System.Windows.Forms.Button SaveButton;
     }
 }
 

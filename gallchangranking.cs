@@ -141,6 +141,58 @@ namespace DcCrawler
             }
             return false;
         }
+
+        public string ToString(string op)
+        {
+            List<string> stringList = new List<string>();
+            string str = "";
+            bool shouldPass = false;
+            if (op.Equals("IdorIp"))
+            {
+                if (userInfos.Count == 1)
+                    return this.userInfos[0].IdorIp;
+                foreach (UserInfo user in userInfos)
+                {
+                    shouldPass = false;
+                    foreach(string temp in stringList)
+                    {
+                        if (temp.Equals(user.IdorIp))
+                            shouldPass = true;
+                    }
+                    if (shouldPass)
+                        continue;
+                    else
+                    {
+                        stringList.Add(user.IdorIp);
+                        str += user.IdorIp + "<br>";
+                    }
+                }
+                return str;
+            }
+            else if (op.Equals("Nick"))
+            {
+                if (userInfos.Count == 1)
+                    return this.userInfos[0].Nick;
+                foreach (UserInfo user in userInfos)
+                {
+                    shouldPass = false;
+                    foreach (string temp in stringList)
+                    {
+                        if (temp.Equals(user.Nick))
+                            shouldPass = true;
+                    }
+                    if (shouldPass)
+                        continue;
+                    else
+                    {
+                        stringList.Add(user.Nick);
+                        str += user.Nick + "<br>";
+                    }
+                }
+                return str;
+            }
+            return "error";
+        }
         public override string ToString()
         {
             if (this.status == (int)userStatus.notUsed)
@@ -606,5 +658,60 @@ gcrk.Crawler();
                 }
             }
         }
+        private string TableMaker(string[] strArr)
+        {
+            string str = "<tr align='center' bgcolor='white'>";
+            foreach (string temp in strArr)
+            {
+                str += "<td>" + temp + "</td>";
+            }
+            return str + "</tr>";
+        }
+        public void SaveToTable(string filename)
+        {
+            string resultDir = Directory.GetCurrentDirectory() + "\\results\\";
+            Directory.CreateDirectory(resultDir);
+            using (StreamWriter sw = new StreamWriter(resultDir + filename))
+            {
+                this.RankingUpdate();
+                int totalCount = 0, totalReply = 0, totalGallCount = 0, totalGallRecommend = 0;
+                foreach (UserRank user in userList)
+                {
+                    totalCount += user.count; totalReply += user.replyNum;
+                    totalGallCount += user.gallCount; totalGallRecommend += user.gallRecommend;
+                }
+                sw.Write("총 글 수: " + totalCount.ToString() + "<br>");
+                sw.Write("갤창랭킹 2.0 made by hanel2527,<br>마이 리틀 포니 갤러리<br>");
+                sw.WriteLine("<table width='100%' cellpadding='1' bgcolor='purple'>");
+                string[] strInfos = { "랭킹", "닉", "글 수", "갤 지분(%)" };
+                sw.WriteLine(TableMaker(strInfos));
+                int index = 0;
+                int rank = 0;
+                double gallShare;
+                string[] strArr = new string[4];
+                for (int i = 0; i < userList.Count; i++)
+                {
+                    if (userList[i].status == (int)userStatus.notUsed) continue;
+                    else
+                    {
+                        index++;
+                        if (index == 1)
+                        {
+                            rank = 1;
+                        }
+                        else if (userList[i - 1].count != userList[i].count)
+                        {
+                            rank = index;
+                        }
+                        gallShare = (double)(10000 * userList[i].count / totalCount) / 100.0;
+                        strArr[0] = rank.ToString(); strArr[1] = userList[i].ToString("Nick");
+                        strArr[2] = userList[i].ToString("IdorIp"); strArr[3] = gallShare.ToString();
+                        sw.Write(TableMaker(strArr));
+                    }
+                }
+                sw.WriteLine("</table>");
+            }
+        }
     }
 }
+

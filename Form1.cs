@@ -15,7 +15,7 @@ namespace DcCrawler.WF
 {
     public partial class Form1 : Form
     {
-        public string version = "v2.0.9-beta";
+        public string version = "v2.0.9";
         public Form1()
         {
             InitializeComponent();
@@ -105,11 +105,10 @@ namespace DcCrawler.WF
             gcrk.CrawlingEnded += UserListUpdate;
             gcrk.Crawler();
         }
-
+        string filename = "";
         hdc.DataToText dtt;
         private void callFileListBtn_Click(object sender, EventArgs e)
         {
-            string filename = "";
             tempDataFileSelect tdfs = new tempDataFileSelect();
             if(tdfs.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -118,9 +117,6 @@ namespace DcCrawler.WF
 
             dtt = new hdc.DataToText(filename);
             this.UpdateUserListView();
-            string gallId = filename.Split('_')[0];
-            string newFilename = gallId + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + ".result.txt";
-            fileNameTextBox.Text = newFilename;
         }
         private void UpdateUserListView()
         {
@@ -177,13 +173,6 @@ namespace DcCrawler.WF
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            string filename = fileNameTextBox.Text;
-            dtt.SaveToText(filename);
-            programStatusLabel.Text = "저장 완료";
-        }
-
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             this.linkLabel1.LinkVisited = true;
@@ -199,6 +188,14 @@ namespace DcCrawler.WF
         {
             this.updateLinkLabel.LinkVisited = true;
             System.Diagnostics.Process.Start("https://github.com/hanel2527/dcinisde-crawler.ver.2/releases/latest");
+        }
+
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            string gallId = filename.Split('_')[0];
+            string newFilename = gallId + DateTime.Now.ToString("_yyyy-MM-dd_HH-mm-ss") + ".result.txt";
+            saveFileForm sff = new saveFileForm(newFilename, dtt);
+            sff.ShowDialog();
         }
     }
 }
