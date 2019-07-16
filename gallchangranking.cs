@@ -683,12 +683,12 @@ gcrk.Crawler();
                 sw.Write("총 글 수: " + totalCount.ToString() + "<br>");
                 sw.Write("갤창랭킹 2.0 made by hanel2527,<br>마이 리틀 포니 갤러리<br>");
                 sw.WriteLine("<table width='100%' cellpadding='1' bgcolor='purple'>");
-                string[] strInfos = { "랭킹", "닉", "글 수", "갤 지분(%)" };
+                string[] strInfos = { "랭킹", "닉", "아이디/아이피", "글 수", "갤 지분(%)" };
                 sw.WriteLine(TableMaker(strInfos));
                 int index = 0;
                 int rank = 0;
                 double gallShare;
-                string[] strArr = new string[4];
+                string[] strArr = new string[5];
                 for (int i = 0; i < userList.Count; i++)
                 {
                     if (userList[i].status == (int)userStatus.notUsed) continue;
@@ -705,7 +705,8 @@ gcrk.Crawler();
                         }
                         gallShare = (double)(10000 * userList[i].count / totalCount) / 100.0;
                         strArr[0] = rank.ToString(); strArr[1] = userList[i].ToString("Nick");
-                        strArr[2] = userList[i].ToString("IdorIp"); strArr[3] = gallShare.ToString();
+                        strArr[2] = userList[i].ToString("IdorIp"); strArr[3] = userList[i].count.ToString();
+                        strArr[4] = gallShare.ToString();
                         sw.Write(TableMaker(strArr));
                     }
                 }
