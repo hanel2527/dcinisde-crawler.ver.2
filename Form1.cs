@@ -56,7 +56,14 @@ namespace DcCrawler.WF
             if (isRangeDate.Checked)
             {
                 TimeSpan timeSpan = endDate.Value - (DateTime)arr[1];
-                pageProgressBar.Value = timeSpan.Days;
+                if(timeSpan.Days < 0)
+                {
+                    pageProgressBar.Value = 0;
+                }
+                else
+                {
+                    pageProgressBar.Value = timeSpan.Days;
+                } 
             }
             else
             {
