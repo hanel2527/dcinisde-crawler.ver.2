@@ -683,7 +683,6 @@ gcrk.Crawler();
                 sw.Write("<table width='100%' style='border-collapse:collapse' border='1' bordercolor='purple'>");
                 sw.Write("<tr align='center'> <td colspan='5'>" + "총 글 수: " + totalCount.ToString() + "</td></tr>");
                 sw.Write("<tr align='center'> <td colspan='5'>"+ "갤창랭킹 2.0 made by hanel2527,<br>마이 리틀 포니 갤러리" + "</td></tr>");
-                sw.Write("<tr align='center'> <td colspan='5'> </td></tr>");
                 string[] strInfos = { "랭킹", "닉", "아이디/아이피", "글 수", "갤 지분(%)" };
                 sw.WriteLine(TableMaker(strInfos));
                 int index = 0;
