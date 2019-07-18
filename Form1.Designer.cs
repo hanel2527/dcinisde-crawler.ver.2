@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.dataToText = new System.Windows.Forms.TabPage();
+            this.SaveButton = new System.Windows.Forms.Button();
             this.cancelAllCheck = new System.Windows.Forms.Button();
             this.userListView = new System.Windows.Forms.ListView();
             this.index = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -65,7 +66,6 @@
             this.isMinor = new System.Windows.Forms.CheckBox();
             this.pageProgressBar = new System.Windows.Forms.ProgressBar();
             this.tabPages = new System.Windows.Forms.TabControl();
-            this.SaveButton = new System.Windows.Forms.Button();
             this.dataToText.SuspendLayout();
             this.gcrkCrawler.SuspendLayout();
             this.tabPages.SuspendLayout();
@@ -88,6 +88,16 @@
             this.dataToText.TabIndex = 1;
             this.dataToText.Text = "동일닉 처리 및 텍스트 파일로 저장";
             this.dataToText.UseVisualStyleBackColor = true;
+            // 
+            // SaveButton
+            // 
+            this.SaveButton.Location = new System.Drawing.Point(676, 405);
+            this.SaveButton.Name = "SaveButton";
+            this.SaveButton.Size = new System.Drawing.Size(107, 52);
+            this.SaveButton.TabIndex = 13;
+            this.SaveButton.Text = "파일 저장";
+            this.SaveButton.UseVisualStyleBackColor = true;
+            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
             // cancelAllCheck
             // 
@@ -435,16 +445,6 @@
             this.tabPages.Size = new System.Drawing.Size(798, 506);
             this.tabPages.TabIndex = 0;
             // 
-            // SaveButton
-            // 
-            this.SaveButton.Location = new System.Drawing.Point(676, 405);
-            this.SaveButton.Name = "SaveButton";
-            this.SaveButton.Size = new System.Drawing.Size(107, 52);
-            this.SaveButton.TabIndex = 13;
-            this.SaveButton.Text = "파일 저장";
-            this.SaveButton.UseVisualStyleBackColor = true;
-            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -452,7 +452,7 @@
             this.ClientSize = new System.Drawing.Size(800, 501);
             this.Controls.Add(this.tabPages);
             this.Name = "Form1";
-            this.Text = "갤창랭킹.v2.0.9";
+            this.Text = "갤창랭킹.v2.0.10";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.dataToText.ResumeLayout(false);
             this.dataToText.PerformLayout();

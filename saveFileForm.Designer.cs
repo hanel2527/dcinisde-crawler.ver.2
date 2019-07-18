@@ -33,11 +33,15 @@
             this.filenameTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.explainLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.maximumRankTextBox = new System.Windows.Forms.TextBox();
+            this.minimumCountTextBox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // SaveAsText
             // 
-            this.SaveAsText.Location = new System.Drawing.Point(12, 94);
+            this.SaveAsText.Location = new System.Drawing.Point(12, 170);
             this.SaveAsText.Name = "SaveAsText";
             this.SaveAsText.Size = new System.Drawing.Size(120, 49);
             this.SaveAsText.TabIndex = 0;
@@ -47,7 +51,7 @@
             // 
             // SaveAsTable
             // 
-            this.SaveAsTable.Location = new System.Drawing.Point(156, 94);
+            this.SaveAsTable.Location = new System.Drawing.Point(150, 170);
             this.SaveAsTable.Name = "SaveAsTable";
             this.SaveAsTable.Size = new System.Drawing.Size(120, 49);
             this.SaveAsTable.TabIndex = 1;
@@ -74,7 +78,7 @@
             // explainLinkLabel
             // 
             this.explainLinkLabel.AutoSize = true;
-            this.explainLinkLabel.Location = new System.Drawing.Point(299, 128);
+            this.explainLinkLabel.Location = new System.Drawing.Point(289, 204);
             this.explainLinkLabel.Name = "explainLinkLabel";
             this.explainLinkLabel.Size = new System.Drawing.Size(137, 15);
             this.explainLinkLabel.TabIndex = 6;
@@ -82,11 +86,49 @@
             this.explainLinkLabel.Text = "표로 저장 사용방법";
             this.explainLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.explainLinkLabel_LinkClicked);
             // 
+            // maximumRankTextBox
+            // 
+            this.maximumRankTextBox.Location = new System.Drawing.Point(16, 85);
+            this.maximumRankTextBox.Name = "maximumRankTextBox";
+            this.maximumRankTextBox.Size = new System.Drawing.Size(100, 25);
+            this.maximumRankTextBox.TabIndex = 9;
+            this.maximumRankTextBox.Text = "300";
+            // 
+            // minimumCountTextBox
+            // 
+            this.minimumCountTextBox.Location = new System.Drawing.Point(16, 139);
+            this.minimumCountTextBox.Name = "minimumCountTextBox";
+            this.minimumCountTextBox.Size = new System.Drawing.Size(100, 25);
+            this.minimumCountTextBox.TabIndex = 10;
+            this.minimumCountTextBox.Text = "3";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(16, 63);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(157, 15);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "일정 랭킹 이하만 출력";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(16, 121);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(162, 15);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "일정 글 수 이상만 출력";
+            // 
             // saveFileForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(462, 159);
+            this.ClientSize = new System.Drawing.Size(462, 242);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.minimumCountTextBox);
+            this.Controls.Add(this.maximumRankTextBox);
             this.Controls.Add(this.explainLinkLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.filenameTextBox);
@@ -107,5 +149,9 @@
         private System.Windows.Forms.TextBox filenameTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.LinkLabel explainLinkLabel;
+        private System.Windows.Forms.TextBox maximumRankTextBox;
+        private System.Windows.Forms.TextBox minimumCountTextBox;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }

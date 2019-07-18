@@ -15,7 +15,7 @@ namespace DcCrawler.WF
 {
     public partial class Form1 : Form
     {
-        public string version = "v2.0.9";
+        public string version = "v2.0.10";
         public Form1()
         {
             InitializeComponent();

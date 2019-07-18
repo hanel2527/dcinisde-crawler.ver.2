@@ -618,7 +618,7 @@ gcrk.Crawler();
                          select userRank;
             userList = sorted.ToList<UserRank>();
         }
-        public void SaveToText(string filename)
+        public void SaveToText(string filename, int maximumRank, int minimumCount)
         {
             string resultDir = Directory.GetCurrentDirectory() + "\\results\\";
             Directory.CreateDirectory(resultDir);
@@ -651,6 +651,10 @@ gcrk.Crawler();
                         {
                             rank = index;
                         }
+                        if (rank > maximumRank || userList[i].count < minimumCount)
+                        {
+                            break;
+                        }
                         gallShare = (double)(10000 * userList[i].count / totalCount) / 100.0;
                         string str = rank.ToString() + "위\t" + userList[i].ToString() + "\t" + userList[i].count.ToString() + "글\t" + gallShare.ToString() + "%";
                         sw.WriteLine(str);
@@ -667,7 +671,7 @@ gcrk.Crawler();
             }
             return str + "</tr>";
         }
-        public void SaveToTable(string filename)
+        public void SaveToTable(string filename, int maximumRank, int minimumCount)
         {
             string resultDir = Directory.GetCurrentDirectory() + "\\results\\";
             Directory.CreateDirectory(resultDir);
@@ -702,6 +706,10 @@ gcrk.Crawler();
                         else if (userList[i - 1].count != userList[i].count)
                         {
                             rank = index;
+                        }
+                        if (rank > maximumRank || userList[i].count < minimumCount)
+                        {
+                            break;
                         }
                         gallShare = (double)(10000 * userList[i].count / totalCount) / 100.0;
                         strArr[0] = rank.ToString(); strArr[1] = userList[i].ToString("Nick");

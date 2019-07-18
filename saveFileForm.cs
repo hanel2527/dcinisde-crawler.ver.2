@@ -29,14 +29,18 @@ namespace DcCrawler.WF
 
         private void SaveAsText_Click(object sender, EventArgs e)
         {
-            dtt.SaveToText(this.filenameTextBox.Text);
+            int maximumRank = int.Parse(maximumRankTextBox.Text);
+            int minimumCount = int.Parse(minimumCountTextBox.Text);
+            dtt.SaveToText(this.filenameTextBox.Text, maximumRank, minimumCount);
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
             
         }
 
         private void SaveAsTable_Click(object sender, EventArgs e)
         {
-            dtt.SaveToTable(this.filenameTextBox.Text);
+            int maximumRank = int.Parse(maximumRankTextBox.Text);
+            int minimumCount = int.Parse(minimumCountTextBox.Text);
+            dtt.SaveToTable(this.filenameTextBox.Text, maximumRank, minimumCount);
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
 
         }
