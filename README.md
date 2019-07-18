@@ -1,7 +1,6 @@
 갤창랭킹 2.0 made by hanel2527
 
-갤창랭킹, 잉여랭킹, 디씨랭킹, 디시랭킹, 디시인사이드
-
+갤창랭킹 프로그램 다운로드, 잉여랭킹, 디씨랭킹, 디시랭킹, 디시인사이드
 
 기본 갤창랭킹을 C#을 이용해 다시 만든 버전입니다.
 
@@ -10,7 +9,7 @@
 외부 라이브러리: HtmlAgilityPack, Json.NET
 
 
-<a href='https://github.com/hanel2527/dcinisde-crawler.ver.2/releases/download/v2.0.9/gallchangranking.ver.2.0.9.zip'>갤창랭킹.ver.2.0.9</a>
+<a href='https://github.com/hanel2527/dcinisde-crawler.ver.2/releases/download/v2.0.9.1/gallchangranking.ver.2.0.9.1.zip'>갤창랭킹.ver.2.0.9.1</a>
 
 -GUI 적용(Windows Forms)
 
