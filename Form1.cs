@@ -15,7 +15,7 @@ namespace DcCrawler.WF
 {
     public partial class Form1 : Form
     {
-        public string version = "v2.0.10";
+        public string version = "v2.0.9.2";
         public Form1()
         {
             InitializeComponent();
@@ -52,7 +52,12 @@ namespace DcCrawler.WF
         private void NewPageUpdate(object sender, EventArgs e)
         {
             System.Collections.ArrayList arr = (System.Collections.ArrayList)sender;
+            if((int)arr[2] % 1000 == 0)
+            {
+                textConsole.Clear();
+            }
             textConsole.AppendText((string)arr[0] + "\r\n");
+
             if (isRangeDate.Checked)
             {
                 TimeSpan timeSpan = endDate.Value - (DateTime)arr[1];

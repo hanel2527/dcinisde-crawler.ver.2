@@ -288,7 +288,7 @@ gcrk.Crawler();
         bool isMinor;
         public string gallId, gallName, gallUrl, version = "v2.0.8-beta";
         List<UserRank> userList = new List<UserRank>();
-        List<UserData> gallDatas = new List<UserData>();
+        //List<UserData> gallDatas = new List<UserData>();
 
         public GallchangrankingCrawler(int initPage, int endPage, string gallId, bool isMinor)
         {
@@ -457,7 +457,7 @@ gcrk.Crawler();
                     }
                     UserData tempUserData = new UserData(tempUserInfo);
                     tempUserData.DataInput(gallNum, replyNum, gallCount, gallRecommend, gallDate, subject);
-                    gallDatas.Add(tempUserData);
+                    //gallDatas.Add(tempUserData);
                 }
                 previousPageGallNum = GetOnlyInt(nicks[nicks.Count - 1].SelectSingleNode("./td[@class='gall_num']").InnerText);
                 DateTime currentDate = DateTime.ParseExact(nicks[nicks.Count - 1].
@@ -501,15 +501,17 @@ gcrk.Crawler();
         public void SaveResult(string filename)
         {
             string outputUserList = njson.JsonConvert.SerializeObject(userList, njson.Formatting.Indented);
-            string outputUserDatas = njson.JsonConvert.SerializeObject(gallDatas, njson.Formatting.Indented);
+            //string outputUserDatas = njson.JsonConvert.SerializeObject(gallDatas, njson.Formatting.Indented);
             using (var ofile = new StreamWriter(filename + ".json"))
             {
                 ofile.WriteLine(outputUserList);
             }
+            /*
             using (var ofile = new StreamWriter(filename + ".gall-data.json"))
             {
                 ofile.WriteLine(outputUserDatas);
             }
+            */
             Console.WriteLine(filename);
             Console.ReadLine();
         }
