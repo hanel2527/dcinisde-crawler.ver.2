@@ -297,7 +297,7 @@ gcrk.Crawler();
             this.initPage = initPage; this.endPage = endPage;
             this.gallId = gallId; this.isMinor = isMinor;
             if (this.isMinor) { gallUrl = "https://gall.dcinside.com/mgallery/board/lists?id=" + gallId; }
-            else { gallUrl = "http://gall.dcinside.com/board/lists/?id=" + gallId; }
+            else { gallUrl = "https://gall.dcinside.com/board/lists/?id=" + gallId; }
             GallCheck(gallUrl);
             Console.WriteLine(gallName);
         }
@@ -307,7 +307,7 @@ gcrk.Crawler();
             this.initDate = initDate; this.endDate = endDate;
             this.gallId = gallId; this.isMinor = isMinor;
             if (this.isMinor) { gallUrl = "https://gall.dcinside.com/mgallery/board/lists?id=" + gallId; }
-            else { gallUrl = "http://gall.dcinside.com/board/lists/?id=" + gallId; }
+            else { gallUrl = "https://gall.dcinside.com/board/lists/?id=" + gallId; }
         }
         public GallchangrankingCrawler() { }
         public void GallCheck(string gallUrl)
@@ -521,7 +521,7 @@ gcrk.Crawler();
     {
         public string[] telecomIps = //통피
         {
-            "203.226", "211.234", "223.32", "223.63",       //SKT
+            "203.226", "211.234", "223.32", "223.33", "223.34", "223.35", "223.36", "223.37", "223.38", "223.39", "223.40", "223.41", "223.42", "223.43", "223.44", "223.45", "223.46", "223.47", "223.48", "223.49", "223.50", "223.51", "223.52", "223.53", "223.54", "223.55", "223.56", "223.57", "223.58", "223.59", "223.60", "223.61", "223.62", "223.63",      //SKT
             "39.7", "110.70", "175.223", "175.252", "211.246", "118.235", //KT
             "61.43", "211.234", "117.111", "211.36", "106.102"      //LG U+
         };
