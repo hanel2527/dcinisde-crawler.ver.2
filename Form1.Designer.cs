@@ -452,7 +452,7 @@
             this.ClientSize = new System.Drawing.Size(800, 501);
             this.Controls.Add(this.tabPages);
             this.Name = "Form1";
-            this.Text = "갤창랭킹.v2.0.9.2";
+            this.Text = "갤창랭킹.v2.0.9.3";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.dataToText.ResumeLayout(false);
             this.dataToText.PerformLayout();

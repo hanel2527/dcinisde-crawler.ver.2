@@ -282,6 +282,7 @@ gcrk.Crawler();
         public event EventHandler newPageHappened;
         public event EventHandler CrawlingEnded;
         public event EventHandler NewVersionUpdateExist;
+        public event EventHandler ErrorOccured;
 
         int initPage, endPage;
         DateTime initDate, endDate;
@@ -373,7 +374,20 @@ gcrk.Crawler();
             int currentPage = this.initPage;
             while (true)
             {
-                string text = client.DownloadString(url + currentPage.ToString());
+                string text;
+                try
+                {
+                    text = client.DownloadString(url + currentPage.ToString());
+                    if (string.IsNullOrEmpty(text))
+                    {
+                        continue;
+                    }
+                }
+                catch
+                {
+                    continue;
+                }
+                 
 
                 hap.HtmlDocument textHap = new hap.HtmlDocument();
                 textHap.LoadHtml(text);
@@ -381,84 +395,96 @@ gcrk.Crawler();
                 hap.HtmlNodeCollection nicks = textHap.DocumentNode.SelectNodes("//tr[@class='ub-content us-post']");
                 //Console.WriteLine(nicks.Count);
                 //Console.WriteLine("==================" + currentPage.ToString() + "==================");
-
-                foreach (hap.HtmlNode nick in nicks)
+                try
                 {
-                    int gallNum, replyNum, gallCount, gallRecommend;
-                    DateTime gallDate; string subject;
+                    foreach (hap.HtmlNode nick in nicks)
+                    {
+                        int gallNum, replyNum, gallCount, gallRecommend;
+                        DateTime gallDate; string subject;
 
-                    gallNum = GetOnlyInt(nick.SelectSingleNode("./td[@class='gall_num']").InnerText);
-                    gallDate = DateTime.ParseExact(nick.SelectSingleNode("./td[@class='gall_date']").Attributes["title"].Value,
-                        "yyyy-MM-dd HH:mm:ss", null);
-                    Console.WriteLine(gallNum.ToString() + " " + gallDate.ToString());
-                    if (gallNum >= previousPageGallNum)
-                    {
-                        Console.WriteLine(previousPageGallNum.ToString() + " " + gallNum.ToString());
-                        Console.WriteLine("번호 에러");
-                        continue;
-                    }
-                    if (DateTime.Compare(gallDate, initDate) < 0 || DateTime.Compare(gallDate, endDate) > 0)
-                    {
-                        Console.WriteLine("날짜 에러");
-                        continue;
-                    }
-
-                    hap.HtmlNode user = nick.SelectSingleNode("./td[@class='gall_writer ub-writer']");
-                    UserInfo tempUserInfo = new UserInfo(user.Attributes["data-nick"].Value);
-                    if (user.Attributes["data-uid"].Value == "")
-                    {
-                        tempUserInfo.setFluidNick(user.Attributes["data-ip"].Value);
-                    }
-                    else
-                    {
-                        tempUserInfo.setFixedNick(user.Attributes["data-uid"].Value);
-                    }
-
-                    //replyNum and subject are in <td class='gall_tit ub-word'></td>
-                    hap.HtmlNode subjectNode = nick.SelectSingleNode("./td[2]");
-                    try
-                    {
-                        if (subjectNode.Attributes["class"].Value == "gall_subject")
+                        gallNum = GetOnlyInt(nick.SelectSingleNode("./td[@class='gall_num']").InnerText);
+                        gallDate = DateTime.ParseExact(nick.SelectSingleNode("./td[@class='gall_date']").Attributes["title"].Value,
+                            "yyyy-MM-dd HH:mm:ss", null);
+                        Console.WriteLine(gallNum.ToString() + " " + gallDate.ToString());
+                        if (gallNum >= previousPageGallNum)
                         {
-                            subjectNode = nick.SelectSingleNode("./td[3]");
+                            Console.WriteLine(previousPageGallNum.ToString() + " " + gallNum.ToString());
+                            Console.WriteLine("번호 에러");
+                            continue;
                         }
-                        subject = subjectNode.SelectSingleNode("./a[1]").InnerText;
-                        if (subjectNode.SelectNodes("./a").Count == 2)
+                        if (DateTime.Compare(gallDate, initDate) < 0 || DateTime.Compare(gallDate, endDate) > 0)
                         {
-                            replyNum = GetOnlyInt(subjectNode.SelectSingleNode("./a[@class='reply_numbox']/span").InnerText);
+                            Console.WriteLine("날짜 에러");
+                            continue;
+                        }
+
+                        hap.HtmlNode user = nick.SelectSingleNode("./td[@class='gall_writer ub-writer']");
+                        UserInfo tempUserInfo = new UserInfo(user.Attributes["data-nick"].Value);
+                        if (user.Attributes["data-uid"].Value == "")
+                        {
+                            tempUserInfo.setFluidNick(user.Attributes["data-ip"].Value);
                         }
                         else
                         {
+                            tempUserInfo.setFixedNick(user.Attributes["data-uid"].Value);
+                        }
+
+                        //replyNum and subject are in <td class='gall_tit ub-word'></td>
+                        hap.HtmlNode subjectNode = nick.SelectSingleNode("./td[2]");
+                        try
+                        {
+                            if (subjectNode.Attributes["class"].Value == "gall_subject")
+                            {
+                                subjectNode = nick.SelectSingleNode("./td[3]");
+                            }
+                            subject = subjectNode.SelectSingleNode("./a[1]").InnerText;
+                            if (subjectNode.SelectNodes("./a").Count == 2)
+                            {
+                                replyNum = GetOnlyInt(subjectNode.SelectSingleNode("./a[@class='reply_numbox']/span").InnerText);
+                            }
+                            else
+                            {
+                                replyNum = 0;
+                            }
+                        }
+                        catch
+                        {
+                            subject = "NullSubjectException";
                             replyNum = 0;
                         }
-                    }
-                    catch
-                    {
-                        subject = "NullSubjectException";
-                        replyNum = 0;
-                    }
-                    // Console.WriteLine("댓글: " + replyNum.ToString());
-                    gallCount = GetOnlyInt(nick.SelectSingleNode("./td[@class='gall_count']").InnerText);
-                    gallRecommend = GetOnlyInt(nick.SelectSingleNode("./td[@class='gall_recommend']").InnerText);
+                        // Console.WriteLine("댓글: " + replyNum.ToString());
+                        gallCount = GetOnlyInt(nick.SelectSingleNode("./td[@class='gall_count']").InnerText);
+                        gallRecommend = GetOnlyInt(nick.SelectSingleNode("./td[@class='gall_recommend']").InnerText);
 
 
-                    //Dictionary value => count, replyNum, gallCount, gallRecommend
-                    if (userDic.ContainsKey(tempUserInfo))
-                    {
-                        userDic[tempUserInfo][0] += 1;
-                        userDic[tempUserInfo][1] += replyNum;
-                        userDic[tempUserInfo][2] += gallCount;
-                        userDic[tempUserInfo][3] += gallRecommend;
+                        //Dictionary value => count, replyNum, gallCount, gallRecommend
+                        if (userDic.ContainsKey(tempUserInfo))
+                        {
+                            userDic[tempUserInfo][0] += 1;
+                            userDic[tempUserInfo][1] += replyNum;
+                            userDic[tempUserInfo][2] += gallCount;
+                            userDic[tempUserInfo][3] += gallRecommend;
+                        }
+                        else
+                        {
+                            int[] tempInts = new int[] { 1, replyNum, gallCount, gallRecommend };
+                            userDic.Add(tempUserInfo, tempInts);
+                        }
+                        UserData tempUserData = new UserData(tempUserInfo);
+                        tempUserData.DataInput(gallNum, replyNum, gallCount, gallRecommend, gallDate, subject);
+                        //gallDatas.Add(tempUserData);
                     }
-                    else
-                    {
-                        int[] tempInts = new int[] { 1, replyNum, gallCount, gallRecommend };
-                        userDic.Add(tempUserInfo, tempInts);
-                    }
-                    UserData tempUserData = new UserData(tempUserInfo);
-                    tempUserData.DataInput(gallNum, replyNum, gallCount, gallRecommend, gallDate, subject);
-                    //gallDatas.Add(tempUserData);
                 }
+                catch
+                {
+                    if(ErrorOccured != null)
+                    {
+                        ErrorOccured(text, null);
+                    }
+                    currentPage++;
+                    continue;
+                }
+                
                 previousPageGallNum = GetOnlyInt(nicks[nicks.Count - 1].SelectSingleNode("./td[@class='gall_num']").InnerText);
                 DateTime currentDate = DateTime.ParseExact(nicks[nicks.Count - 1].
                     SelectSingleNode("./td[@class='gall_date']").Attributes["title"].Value, "yyyy-MM-dd HH:mm:ss", null);

@@ -15,7 +15,7 @@ namespace DcCrawler.WF
 {
     public partial class Form1 : Form
     {
-        public string version = "v2.0.9.2";
+        public string version = "v2.0.9.3";
         public Form1()
         {
             InitializeComponent();
@@ -115,7 +115,12 @@ namespace DcCrawler.WF
             textConsole.AppendText("갤창랭킹\r\n");
             gcrk.newPageHappened += NewPageUpdate;
             gcrk.CrawlingEnded += UserListUpdate;
+            gcrk.ErrorOccured += ErrorMessage;
             gcrk.Crawler();
+        }
+        private void ErrorMessage(object sender, EventArgs e)
+        {
+            textConsole.AppendText((string)sender);
         }
         string filename = "";
         hdc.DataToText dtt;
