@@ -9,7 +9,7 @@
 외부 라이브러리: HtmlAgilityPack, Json.NET
 
 
-<a href='https://github.com/hanel2527/dcinisde-crawler.ver.2/releases/download/v2.0.9.3/gallchangranking.ver.2.0.9.3.zip'>갤창랭킹.ver.2.0.9.3</a>
+<a href='https://github.com/hanel2527/dcinisde-crawler.ver.2/releases'>갤창랭킹.ver.2.0.9.3</a>
 
 -GUI 적용(Windows Forms)
 
